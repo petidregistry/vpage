@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet ID Registry | Portal</title>
+    <!-- Google Fonts for typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* === CSS Variables (Matching your UI style) === */
+        :root {
+            --primary-color: #2563eb; 
+            --primary-hover: #1d4ed8;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            --transition: all 0.3s ease;
+            --logo-grey: #a0a0a0; 
+        }
+
+        /* === Global Reset === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* === Header === */
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--logo-grey);
+            text-decoration: none;
+        }
+
+        .logo svg {
+            width: 48px;
+            height: 48px;
+        }
+        
+        .logo svg .logo-shield {
+            fill: none;
+            stroke: var(--logo-grey);
+            stroke-width: 1.5;
+        }
+
+        .logo svg .logo-paw {
+            fill: var(--logo-grey);
+            stroke: none;
+        }
+
+        .logo span {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        /* === Main Content === */
+        main {
+            flex: 1;
+            padding: 4rem 2rem;
+            max-width: 800px; /* Narrower for 2 items */
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* === Action Buttons Grid === */
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .action-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-main);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: var(--primary-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-hover);
+        }
+
+        .action-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .icon-wrapper {
+            background-color: #eff6ff;
+            color: var(--primary-color);
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .action-card:hover .icon-wrapper {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .icon-wrapper svg {
+            width: 32px;
+            height: 32px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .action-card h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .action-card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* === Footer === */
+        footer {
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            margin-top: auto;
+        }
+
+        /* === Responsive === */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            main { padding: 2rem 1.5rem; }
+            .header-container { flex-direction: column; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <path class="logo-shield" d="M50 5L15 20v40c0 15.5 15.5 30 35 35 19.5-5 35-19.5 35-35V20L50 5zm0 8.1l26.9 11.4v26.5c0 10.1-10 19.6-26.9 23.9-16.9-4.3-26.9-13.8-26.9-23.9V24.5L50 13.1z"/>
+                    <path class="logo-paw" d="M50 48c-7.2 0-13 5.8-13 13s5.8 13 13 13 13-5.8 13-13-5.8-13-13-13zm-3 8.3c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1zm6 0c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1zm-9 6.7c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1zm12 0c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1zm-6 6.7c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1zM28 35c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8-8-3.6-8-8zm24 0c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8-8-3.6-8-8zm20-14.5c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8-8-3.6-8-8zm-44 0c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8-8-3.6-8-8z"/>
+                </svg>
+                <span>PetID<br>Registry</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <div class="hero">
+            <h1>Pet ID Portal</h1>
+            <p>Select a service below to manage clinical records or access the global pet database.</p>
+        </div>
+
+        <div class="actions-grid">
+            
+            <!-- Link 1: CliniVault -->
+            <a href="https://petidregistry.github.io/casebank/" class="action-card">
+                <div class="icon-wrapper">
+                    <!-- Shield/Safe Icon for CliniVault -->
+                    <svg viewBox="0 0 24 24"><path d="M12 15V17M6 10H18M7 10V5C7 3.89543 7.89543 3 9 3H15C16.1046 3 17 3.89543 17 5V10M5 10H19C20.1046 10 21 10.8954 21 12V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V12C3 10.8954 3.89543 10 5 10Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <h2>CliniVault</h2>
+                <p>Secure clinical case bank and medical records management.</p>
+            </a>
+
+            <!-- Link 2: Search Registry -->
+            <a href="https://petidregistry.github.io/petidregistry/" class="action-card">
+                <div class="icon-wrapper">
+                    <!-- Search/Check Icon for Registry -->
+                    <svg viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <h2>Search Registry</h2>
+                <p>Check microchip status and verify pet identification details.</p>
+            </a>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; <span id="current-year"></span> Pet ID Registry. All rights reserved.</p>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Update the year
+            const yr = document.getElementById('current-year');
+            if (yr) yr.textContent = new Date().getFullYear();
+
+            // Card entry animations
+            const cards = document.querySelectorAll('.action-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.5s ease ' + (index * 0.15) + 's';
+                
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>
